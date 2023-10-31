@@ -1,0 +1,74 @@
+@startuml
+class Asteroids {
+  id: int
+  --
+  name: text
+  nasa_jpl_url: text
+  absolute_magnitude_h: float
+  estimated_diameter: Estimated_Diameter {}
+  is_potentially_hazardous_asteroid: bool
+  close_approach_data: Close_Approach_Data []
+  orbital_data: Orbital_Data {}
+  is_sentry_object: bool
+}
+
+
+class Estimated_Diameter {
+  kilometers: Estimated_Diameter_kilometers {}
+}
+
+
+class Estimated_Diameter_kilometers {
+  estimated_diameter_min: float
+  estimated_diameter_max: float
+}
+
+class Close_Approach_Data {
+  close_approach_date: date
+  relative_velocity: Relative_Velocity {}
+  miss_distance: Miss_Distance {}
+}
+
+class Relative_Velocity {
+  kilometers_per_second: float
+}
+class Miss_Distance {
+  astronomical: float
+}
+
+class Orbital_Data {
+  orbit_id: int
+  data_arc_in_days: int
+observations_used: int
+orbit_uncertainty: int
+minimum_orbit_intersection:float
+jupiter_tisserand_invariant:float
+epoch_osculation: float eccentricity: float
+ semi_major_axis: float
+inclination: float
+ascending_node_longitude:float
+ orbital_period: float
+perihelion_distance: float
+perihelion_argument: float
+aphelion_distance:float perihelion_time: float
+mean_anomaly:float
+mean_motion:float
+equinox: text
+orbit_class: Orbit_Class {}
+}
+
+
+class Orbit_Class {
+  orbit_class_type: text
+orbit_class_description: text
+orbit_class_range: text
+}
+
+Asteroids o--  Estimated_Diameter
+Estimated_Diameter o--  Estimated_Diameter_kilometers
+Asteroids  o--  Close_Approach_Data
+Close_Approach_Data  o--  Relative_Velocity
+Close_Approach_Data  o--  Miss_Distance
+Asteroids  o-- Orbital_Data
+Orbital_Data  o-- Orbit_Class
+@enduml
